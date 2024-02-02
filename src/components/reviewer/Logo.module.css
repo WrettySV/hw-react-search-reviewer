@@ -1,0 +1,10 @@
+.Logo {
+    display: block;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.Logo img {
+    width: 100px;
+    height: 100px;
+}
