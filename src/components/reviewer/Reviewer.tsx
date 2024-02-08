@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import Settings from '../settings/Settings';
 import styles from './ReviewerStyles.module.css';
 import {asyncFetchReviewer, setContributors, setReviewerError, setReviewer} from '../redux/actions';
-import store, { RootState } from '../redux/store';
+import { RootState } from '../redux/store';
 
 function Reviewer() {
     const reviewer = useSelector((state: RootState) => state.reviewer);
