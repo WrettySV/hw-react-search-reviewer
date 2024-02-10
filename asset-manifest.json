@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/static/css/main.de6222e4.css",
-    "main.js": "/static/js/main.56d9fc21.js",
-    "static/js/787.c56f0e12.chunk.js": "/static/js/787.c56f0e12.chunk.js",
-    "static/media/github-logo.svg": "/static/media/github-logo.5531be85d7a8d6f333e5c7136944a022.svg",
-    "index.html": "/index.html",
-    "main.de6222e4.css.map": "/static/css/main.de6222e4.css.map",
-    "main.56d9fc21.js.map": "/static/js/main.56d9fc21.js.map",
-    "787.c56f0e12.chunk.js.map": "/static/js/787.c56f0e12.chunk.js.map"
+    "main.css": "/hw-react-search-reviewer/static/css/main.de6222e4.css",
+    "main.js": "/hw-react-search-reviewer/static/js/main.c08777ec.js",
+    "static/js/787.c56f0e12.chunk.js": "/hw-react-search-reviewer/static/js/787.c56f0e12.chunk.js",
+    "static/media/github-logo.svg": "/hw-react-search-reviewer/static/media/github-logo.5531be85d7a8d6f333e5c7136944a022.svg",
+    "index.html": "/hw-react-search-reviewer/index.html",
+    "main.de6222e4.css.map": "/hw-react-search-reviewer/static/css/main.de6222e4.css.map",
+    "main.c08777ec.js.map": "/hw-react-search-reviewer/static/js/main.c08777ec.js.map",
+    "787.c56f0e12.chunk.js.map": "/hw-react-search-reviewer/static/js/787.c56f0e12.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.de6222e4.css",
-    "static/js/main.56d9fc21.js"
+    "static/js/main.c08777ec.js"
   ]
 }
