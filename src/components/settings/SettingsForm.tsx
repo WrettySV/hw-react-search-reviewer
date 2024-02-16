@@ -1,21 +1,17 @@
 import React, { useEffect } from 'react';
 import styles from './SettingsStyles.module.css';
-import {useDispatch, useSelector} from "react-redux";
-import store, {RootState} from "../redux/store";
-import {setBlacklist, setLogin, setRepo, setSettingsError} from "../redux/actions";
+import { useSelector } from "react-redux";
+import store, {RootState, useAppDispatch} from "../redux/store";
+import {asyncFetchReviewer, setBlacklist, setLogin, setRepo, setSettingsError} from "../redux/actions";
 
 
-interface SettingsFormProps {
-    handleFetchReviewer: (login: string, repo: string, blacklist: string[]) => void;
-}
+function SettingsForm(){
 
-function SettingsForm({ handleFetchReviewer }: SettingsFormProps){
-
-    const login = useSelector((state: RootState) => state.login);
-    const repo = useSelector((state: RootState) => state.repo);
-    const blacklist = useSelector((state: RootState) => state.blacklist);
-    const error = useSelector((state: RootState) => state.settingsError);
-    const dispatch = useDispatch();
+    const login = useSelector((state: RootState) => state.settings.login);
+    const repo = useSelector((state: RootState) => state.settings.repo);
+    const blacklist = useSelector((state: RootState) => state.settings.blacklist);
+    const error = useSelector((state: RootState) => state.settings.settingsError);
+    const dispatch = useAppDispatch();
 
 
 
@@ -35,7 +31,7 @@ function SettingsForm({ handleFetchReviewer }: SettingsFormProps){
             dispatch(setSettingsError('Ошибка: Логин и репозиторий должны быть заполнены'));
             return;
         }
-        handleFetchReviewer(login, repo, blacklist.split(',').map((item: string) => item.trim()));
+        dispatch(asyncFetchReviewer());
 
         const currentState = store.getState();
         console.log('Текущее состояние:', currentState);

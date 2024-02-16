@@ -4,12 +4,7 @@ import SettingsButton from './SettingsButton';
 import styles from './SettingsStyles.module.css';
 
 
-
-interface SettingsProps {
-    handleFetchReviewer: (login: string, repo: string, blacklist: string[]) => void;
-}
-
-function Settings({ handleFetchReviewer }: SettingsProps) {
+function Settings() {
     const [showSettings, setShowSettings] = useState(false);
 
     const toggleSettings = () => {
@@ -19,7 +14,7 @@ function Settings({ handleFetchReviewer }: SettingsProps) {
     return (
         <div className={styles.Settings}>
             <SettingsButton onClick={toggleSettings} />
-            {showSettings && <SettingsForm handleFetchReviewer={handleFetchReviewer}/>}
+            {showSettings && <SettingsForm />}
         </div>
     );
 }
