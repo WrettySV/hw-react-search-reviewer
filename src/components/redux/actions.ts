@@ -1,5 +1,4 @@
-import {Dispatch} from "redux";
-import {RootState} from "./store";
+import {RootState, AppDispatch} from "./store";
 
 export enum ActionTypes {
     SET_CONTRIBUTORS = 'SET_CONTRIBUTORS',
@@ -49,36 +48,40 @@ export const setSettingsError = (error: string) => {
 };
 
 
-export const asyncFetchReviewer = (
-    login: string,
-    repo: string,
-    blacklist: string[]
-) => async (dispatch: Dispatch, getState: () => RootState) => {
-    try {
+export const asyncFetchReviewer = () => {
+    return async (dispatch: AppDispatch, getState: () => RootState) => {
+
         dispatch(setReviewerError(''));
-        const contributorsUrl = 'https://api.github.com/repos/${login}/${repo}/contributors';
-        const response = await fetch(contributorsUrl);
-        const data = await response.json();
+        try {
+            const login = getState().settings.login;
+            console.log('login ', login);
+            const repo = getState().settings.repo;
+            console.log('repo ', repo);
+            const blacklist = getState().settings.blacklist;
 
-        const filteredContributors = data.filter(
-            (contributor: any) => !blacklist.includes(contributor.login)
-        );
+            const contributorsUrl = `https://api.github.com/repos/${login}/${repo}/contributors`;
+            const response = await fetch(contributorsUrl);
+            const data = await response.json();
 
-        if (filteredContributors.length === 0) {
-            dispatch(setReviewerError('Данные не найдены для указанного логина и репозитория'));
-            return;
+            const filteredContributors = data.filter(
+                (contributor: any) => !blacklist.includes(contributor.login)
+            );
+
+            if (filteredContributors.length === 0) {
+                dispatch(setReviewerError('Данные не найдены для указанного логина и репозитория'));
+                return;
+            }
+            const randomIndex = Math.floor(Math.random() * filteredContributors.length);
+            const randomReviewer = filteredContributors[randomIndex].login;
+
+            dispatch(setContributors(filteredContributors.map((contributor: any) => contributor.login)));
+            dispatch(setReviewer(randomReviewer));
+
+            const currentState = getState();
+            console.log('Текущее состояние:', currentState);
+        } catch (error) {
+            dispatch(setReviewerError('Произошла ошибка при получении данных'));
         }
-        const randomIndex = Math.floor(Math.random() * filteredContributors.length);
-        const randomReviewer = filteredContributors[randomIndex].login;
 
-        dispatch(setContributors(filteredContributors.map((contributor: any) => contributor.login)));
-        dispatch(setReviewer(randomReviewer));
-
-        // const currentState = getState();
-        // console.log('Текущее состояние:', currentState);
-    } catch (error) {
-        dispatch(setReviewerError('Произошла ошибка при получении данных'));
-    }
+    };
 };
-
-
